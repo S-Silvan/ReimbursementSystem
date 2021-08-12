@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Conjunction;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Restrictions;
@@ -50,8 +51,21 @@ public class ManagerDaoImplementation extends ProfileDaoImplementation implement
 			Criteria criteria=session.createCriteria(ReimbursementRequest.class);
 			criteria.add(Restrictions.not(Restrictions.eq("status","Pending")));
 			reimbursementRequestList=criteria.list();
-			for(ReimbursementRequest rd:reimbursementRequestList)
-				rd.getEmployee();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return reimbursementRequestList;
+	}
+	
+	@Override
+	public List<ReimbursementRequest> readReimbursementRequestOfOneEmployee(Integer employeeId){
+		List<ReimbursementRequest> reimbursementRequestList=null;
+		try {
+			session=sessionFactory.openSession();
+			
+			Criteria criteria=session.createCriteria(ReimbursementRequest.class);						
+			criteria.add(Restrictions.eq("employee.id",employeeId));
+			reimbursementRequestList=criteria.list();
 		}catch(Exception e){
 			e.printStackTrace();
 		}

@@ -17,16 +17,6 @@ public class OAuthServiceImplementation implements OAuthService{
 	}
 	
 	@Override
-	public boolean authorize(HttpServletRequest request) {
-		boolean isAuthorized=false;
-		HttpSession httpSession=request.getSession();
-		Employee employee=(Employee) httpSession.getAttribute("employee");
-		if(employee!=null)
-			isAuthorized=oAuthDao.authorize(employee);
-		return isAuthorized;
-	}
-	
-	@Override
 	public boolean logout(HttpServletRequest request) {
 		HttpSession httpSession=request.getSession();
 		httpSession.setAttribute("employee", null);

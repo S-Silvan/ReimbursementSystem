@@ -33,6 +33,12 @@ public class ManagerServiceImplementation extends ProfileServiceImplementation i
 		List<ReimbursementRequest> resolvedReimbursementRequests=managerDao.readResolvedReimbursementRequest();
 		return resolvedReimbursementRequests;
 	}
+	
+	@Override
+	public List<ReimbursementRequest> getReimbursementRequestOfOneEmployee(Integer employeeId){
+		List<ReimbursementRequest> reimbursementRequestOfOneEmployee=managerDao.readReimbursementRequestOfOneEmployee(employeeId);
+		return reimbursementRequestOfOneEmployee;
+	}
 
 	@Override
 	public List<Employee> readAllEmployee() {

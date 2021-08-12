@@ -1,5 +1,5 @@
-<%@page import="com.ers.model.Employee" %>
 <%@page import="java.util.List" %>
+<%@page import="com.ers.model.ReimbursementRequest" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +38,7 @@
                                     <a class="nav-link" href="/ReimbursementSystem/view-manager-resolved-reimbursement-requests">Resolved request</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="/ReimbursementSystem/view-employees">Employees</a>
+                                    <a class="nav-link" href="/ReimbursementSystem/view-employees">Employees</a>
                                 </li>
                                  <li class="nav-item">
                                     <a class="nav-link" href="/ReimbursementSystem/view-manager-profile">Profile</a>
@@ -54,39 +54,34 @@
         </div>
     </header>
     <section class="container mt-4">
-    	<a href="/ReimbursementSystem/view-employee-form" class="btn btn-success">Add employee</a>
         <table class="table table-bordered">
             <thead class="table-dark text-light">
                 <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone Number</th>
-                    <th>Department</th>
-                    <th>View</th>
+                    <th>Employee ID</th>
+                    <th>Employee Name</th>
+                    <th>Employee Email</th>
+                    <th>Amount</th>
+                    <th>Request Date</th>
+                    <th>Status</th>
+                    <th>Remark</th>
                 </tr>
             </thead>
             <tbody>
             	<%
-            		List<Employee> employeeList=(List<Employee>)request.getAttribute("employeeList");
-            		if(employeeList!=null)
-            			for(Employee employee:employeeList){
+            		List<ReimbursementRequest> reimbursementRequestList=(List<ReimbursementRequest>)request.getAttribute("reimbursementRequestsOfOneEmployee");
+            		for(ReimbursementRequest rr:reimbursementRequestList){
             	%>
             		<tr>
-            			<td><%=employee.getId() %></td>
-            			<td><%=employee.getName() %></td>
-            			<td><%=employee.getEmail() %></td>
-            			<td><%=employee.getPhoneNumber() %></td>
-            			<td><%=employee.getDepartment() %></td>
-            			<td>
-            				<form action="/ReimbursementSystem/view-reimbursement-request-of-one-employee" method="post">
-            					<input type="hidden" name="employee-id" value="<%=employee.getId()%>">
-            					<input type="submit" class="btn btn-success" value="Requests">
-            				</form>
-            			</td>
+            			<td><%= rr.getEmployee().getId() %></td>
+            			<td><%= rr.getEmployee().getName() %></td>
+            			<td><%= rr.getEmployee().getEmail() %></td>
+            			<td><%= rr.getAmount() %></td>
+            			<td><%= rr.getRequestDateTime() %></td>
+            			<td><%= rr.getStatus() %></td>
+            			<td><%= rr.getRemark() %></td>
             		</tr>
             	<%
-            			}
+            		}
             	%>
             </tbody>
         </table>

@@ -11,4 +11,5 @@ public interface ManagerDao{
 	List<Employee> readAllEmployee();
 	List<ReimbursementRequest> readPendingReimbursementRequest();
 	List<ReimbursementRequest> readResolvedReimbursementRequest();
+	List<ReimbursementRequest> readReimbursementRequestOfOneEmployee(Integer employeeId);
 }

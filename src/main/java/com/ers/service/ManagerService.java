@@ -10,5 +10,6 @@ public interface ManagerService extends ProfileService{
 	boolean updateReimbursementRequest(ReimbursementRequest reimbursementRequest);
 	List<ReimbursementRequest> getPendingReiumbursementRequest();
 	List<ReimbursementRequest> getResolvedReimbursementRequest();
+	List<ReimbursementRequest> getReimbursementRequestOfOneEmployee(Integer employeeId);
 	List<Employee> readAllEmployee();
 }

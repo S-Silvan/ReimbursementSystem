@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ers.exception.AccessDeniedException;
 import com.ers.model.Employee;
 import com.ers.service.OAuthService;
 import com.ers.service.OAuthServiceImplementation;
@@ -33,8 +34,15 @@ public class OAuthController {
 			response.sendRedirect("/ReimbursementSystem/oauth/login.html");
 		}
 	}
-	public void authorize(String role) {
-		
+	public void authorize(HttpServletRequest request,HttpServletResponse response,String role) throws ServletException, IOException {
+		Employee employee=(Employee)request.getSession().getAttribute("employee");
+		if(employee!=null) {
+			if(employee.getRole().equalsIgnoreCase(role))
+				return;
+			else
+				throw new AccessDeniedException("Access Denied");
+		}else
+			response.sendRedirect("/ReimbursementSystem/oauth/login.html");
 	}
 	public void logout(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 		request.removeAttribute("employee");

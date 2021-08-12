@@ -48,7 +48,10 @@ public class ManagerController extends ProfileController{
 	}
 	
 	public void displayReimbursementRequestOfOneEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		RequestDispatcher rd=request.getRequestDispatcher("/manager/view-reimbursement-requests_of_one_employee.jsp");
+		List<ReimbursementRequest> reimbursementRequestsOfOneEmployee=managerService.getReimbursementRequestOfOneEmployee(Integer.parseInt(request.getParameter("employee-id")));
+		request.setAttribute("reimbursementRequestsOfOneEmployee", reimbursementRequestsOfOneEmployee);
+		rd.forward(request,response);
 	}
 	
 	public void displayAllEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -32,23 +32,5 @@ public class OAuthDaoImplementation implements OAuthDao {
 		}
 		return employee;
 	}
-	
-	@Override
-	public boolean authorize(Employee employee) {
-		boolean result=false;
-		try {
-			session=sessionFactory.openSession();
-			Criteria criteria=session.createCriteria(Employee.class);
-			Conjunction conjunction=Restrictions.conjunction(Restrictions.eq("email", employee.getEmail()),
-															Restrictions.eq("id",employee.getId()));
-			criteria.add(conjunction);
-			List<Employee> employees=criteria.list();
-			if(!employees.isEmpty())
-				result=true;
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
 
 }

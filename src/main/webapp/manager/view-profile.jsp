@@ -83,7 +83,7 @@
                             <h6><%=employee.getPassword() %></h6>
                         </div>
                         <div class="form-group mt-2">
-                            <a href="/ReimbursementSystem/view-employee-edit-profile-form" class="btn btn-success">Edit Profile</a>
+                            <a href="/ReimbursementSystem/view-manager-edit-profile-form" class="btn btn-success">Edit Profile</a>
                         </div>
                     </div>
                 </div>
