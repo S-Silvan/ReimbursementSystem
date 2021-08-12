@@ -23,9 +23,6 @@ public class ManagerDaoImplementation extends ProfileDaoImplementation implement
 			transaction.commit();
 		}catch(Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(session!=null)
-				session.close();
 		}
 		return key;
 	}
@@ -36,7 +33,7 @@ public class ManagerDaoImplementation extends ProfileDaoImplementation implement
 		try {
 			session=sessionFactory.openSession();
 			Criteria criteria=session.createCriteria(ReimbursementRequest.class);
-			Criterion criterian1=Restrictions.eq("reimbursement_request_status","Pending");
+			Criterion criterian1=Restrictions.eq("status","Pending");
 			criteria.add(criterian1);
 			reimbursementRequestList=criteria.list();
 		}catch(Exception e){
@@ -51,11 +48,10 @@ public class ManagerDaoImplementation extends ProfileDaoImplementation implement
 		try {
 			session=sessionFactory.openSession();
 			Criteria criteria=session.createCriteria(ReimbursementRequest.class);
-			Disjunction disjunction=Restrictions.disjunction();
-			disjunction.add(Restrictions.eq("reimbursement_request_status","Accepted"));
-			disjunction.add(Restrictions.eq("reimbursement_request_status","Cancelled"));
-			criteria.add(disjunction);
+			criteria.add(Restrictions.not(Restrictions.eq("status","Pending")));
 			reimbursementRequestList=criteria.list();
+			for(ReimbursementRequest rd:reimbursementRequestList)
+				rd.getEmployee();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -69,14 +65,13 @@ public class ManagerDaoImplementation extends ProfileDaoImplementation implement
 		try {
 			session=sessionFactory.openSession();
 			transaction=session.beginTransaction();
-			session.update(reimbursementRequest);
+			ReimbursementRequest reimbursementRequestD=session.load(ReimbursementRequest.class, reimbursementRequest.getId());
+			reimbursementRequestD.setStatus(reimbursementRequest.getStatus());
+			session.update(reimbursementRequestD);
 			transaction.commit();
 			result=true;
 		}catch(Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(session!=null)
-				session.close();
 		}
 		return result;
 	}
@@ -90,9 +85,6 @@ public class ManagerDaoImplementation extends ProfileDaoImplementation implement
 			employeeList=criteria.list();
 		}catch(Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(session!=null)
-				session.close();
 		}
 		return employeeList;
 	}

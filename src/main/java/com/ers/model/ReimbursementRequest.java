@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -28,7 +29,7 @@ public class ReimbursementRequest {
 	private LocalDateTime requestDateTime;
 	@Column(name="reimbursement_response_timestamp")
 	private LocalDateTime responseDateTime;
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Employee employee;
 	
 	public Integer getId() {

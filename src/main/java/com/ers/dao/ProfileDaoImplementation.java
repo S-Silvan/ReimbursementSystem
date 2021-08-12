@@ -17,6 +17,10 @@ public class ProfileDaoImplementation extends OAuthDaoImplementation implements 
 			isUpdated=true;
 		}catch(Exception e){
 			e.printStackTrace();
+		}finally {
+			if(session!=null)
+				session.close();
+			sessionFactory=null;
 		}
 		return isUpdated;
 	}
@@ -29,6 +33,10 @@ public class ProfileDaoImplementation extends OAuthDaoImplementation implements 
 			employee=(Employee) session.get(Employee.class, employeeId);
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			if(session!=null)
+				session.close();
+			sessionFactory=null;
 		}
 		return employee;
 	}

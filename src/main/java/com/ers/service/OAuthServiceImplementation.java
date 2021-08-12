@@ -11,13 +11,9 @@ public class OAuthServiceImplementation implements OAuthService{
 	private OAuthDao oAuthDao=new OAuthDaoImplementation();
 	
 	@Override
-	public boolean login(String userid, String password, HttpServletRequest request) {
+	public Employee login(String userid, String password) {
 		Employee employee=oAuthDao.login(userid, password);
-		if(employee!=null) {
-			HttpSession httpSession=request.getSession();
-			httpSession.setAttribute("employee", employee);
-		}
-		return employee!=null;
+		return employee;
 	}
 	
 	@Override

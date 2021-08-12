@@ -5,7 +5,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.Conjunction;
 import org.hibernate.criterion.Restrictions;
 
 import com.ers.model.Employee;
@@ -21,17 +21,14 @@ public class OAuthDaoImplementation implements OAuthDao {
 		try {
 			session=sessionFactory.openSession();
 			Criteria criteria=session.createCriteria(Employee.class);
-			Disjunction disjunction=Restrictions.disjunction(Restrictions.eq("email", email),
+			Conjunction conjunction=Restrictions.conjunction(Restrictions.eq("email", email),
 															Restrictions.eq("password", password));
-			criteria.add(disjunction);
+			criteria.add(conjunction);
 			List<Employee> employees=criteria.list();
 			if(!employees.isEmpty())
 				employee=employees.get(0);
 		}catch(Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(session!=null)
-				session.close();
 		}
 		return employee;
 	}
@@ -42,17 +39,14 @@ public class OAuthDaoImplementation implements OAuthDao {
 		try {
 			session=sessionFactory.openSession();
 			Criteria criteria=session.createCriteria(Employee.class);
-			Disjunction disjunction=Restrictions.disjunction(Restrictions.eq("email", employee.getEmail()),
+			Conjunction conjunction=Restrictions.conjunction(Restrictions.eq("email", employee.getEmail()),
 															Restrictions.eq("id",employee.getId()));
-			criteria.add(disjunction);
+			criteria.add(conjunction);
 			List<Employee> employees=criteria.list();
 			if(!employees.isEmpty())
 				result=true;
 		}catch(Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(session!=null)
-				session.close();
 		}
 		return result;
 	}

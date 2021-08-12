@@ -2,8 +2,10 @@ package com.ers.service;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.ers.model.Employee;
+
 public interface OAuthService {
-	boolean login(String userid, String password, HttpServletRequest request);
+	Employee login(String userid, String password);
 	boolean authorize(HttpServletRequest request);
 	boolean logout(HttpServletRequest request);
 }
