@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
+    <title>Display employees</title>
 
     <!--Stylesheet-->
     <!--Custom-->
@@ -54,7 +54,7 @@
         </div>
     </header>
     <section class="container mt-4">
-    	<a href="/ReimbursementSystem/view-employee-form" class="btn btn-success">Add employee</a>
+    	<a href="/ReimbursementSystem/view-employee-form" class="btn btn-success mb-3">Add employee</a>
         <table class="table table-bordered">
             <thead class="table-dark text-light">
                 <tr>

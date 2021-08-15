@@ -1,6 +1,7 @@
 package com.ers.controller;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -36,12 +37,10 @@ public class ManagerController extends ProfileController{
 	}
 	
 	public void updateReimbursementRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Integer id=Integer.parseInt(request.getParameter("reimbursement-request-id"));
-		String status=request.getParameter("status");
-		
 		ReimbursementRequest reimbursementRequest=new ReimbursementRequest();
-		reimbursementRequest.setId(id);
-		reimbursementRequest.setStatus(status);
+		reimbursementRequest.setId(Integer.parseInt(request.getParameter("reimbursement-request-id")));
+		reimbursementRequest.setStatus(request.getParameter("status"));
+		reimbursementRequest.setResponseDateTime(LocalDateTime.now());
 		
 		managerService.updateReimbursementRequest(reimbursementRequest);
 		displayResolvedReimbursementRequest(request, response);

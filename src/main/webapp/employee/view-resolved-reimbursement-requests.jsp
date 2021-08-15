@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
+    <title>Resolved reimbursement request</title>
 
     <!--Stylesheet-->
     <!--Custom-->
@@ -59,6 +59,7 @@
                 <tr>
                     <th>Amount</th>
                     <th>Request Date</th>
+                    <th>Resolved Date</th>
                     <th>Status</th>
                     <th>Remark</th>
                 </tr>
@@ -72,6 +73,7 @@
             		<tr>
             			<td><%= rr.getAmount() %></td>
             			<td><%= rr.getRequestDateTime() %></td>
+            			<td><%= rr.getResponseDateTime() %></td>
             			<td><%= rr.getStatus() %></td>
             			<td><%= rr.getRemark() %></td>
             		</tr>

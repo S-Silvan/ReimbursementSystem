@@ -81,6 +81,7 @@ public class ManagerDaoImplementation extends ProfileDaoImplementation implement
 			transaction=session.beginTransaction();
 			ReimbursementRequest reimbursementRequestD=session.load(ReimbursementRequest.class, reimbursementRequest.getId());
 			reimbursementRequestD.setStatus(reimbursementRequest.getStatus());
+			reimbursementRequestD.setResponseDateTime(reimbursementRequest.getResponseDateTime());
 			session.update(reimbursementRequestD);
 			transaction.commit();
 			result=true;

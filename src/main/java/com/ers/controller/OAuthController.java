@@ -30,18 +30,17 @@ public class OAuthController {
 			else 
 				rd=request.getRequestDispatcher("/view-employee-dashboard");
 			rd.forward(request, response);
-		}else {
+		}else 
 			response.sendRedirect("/ReimbursementSystem/oauth/login.html");
-		}
 	}
 	public void authorize(HttpServletRequest request,HttpServletResponse response,String role) throws ServletException, IOException {
 		Employee employee=(Employee)request.getSession().getAttribute("employee");
-		if(employee!=null) {
+		if(employee!=null) 
 			if(employee.getRole().equalsIgnoreCase(role))
 				return;
 			else
 				throw new AccessDeniedException("Access Denied");
-		}else
+		else 
 			response.sendRedirect("/ReimbursementSystem/oauth/login.html");
 	}
 	public void logout(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
