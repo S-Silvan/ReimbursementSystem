@@ -27,7 +27,7 @@ Reimbursement system for a company's employees. Employees can request reimbursem
 * Allow administrators to submit reimbursement requests for other administrators to approve or deny.
 
 ## Getting Started
-- git clone https://github.com/S-Silvan/ReimbursementSystem.git
+- Clone the project using `git clone`
 
 ## Usage
 - Run maven build
